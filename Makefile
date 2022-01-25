@@ -16,3 +16,6 @@ all: $(OBJS)
 clean:
 	rm *.o
 	rm main
+
+format:
+	clang-format -i *.c *.h
