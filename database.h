@@ -18,13 +18,15 @@ enum spending_group {
     TRIPS,
     HOME_APPLIANCES,
     TECHNOLOGY,
-    OTHERS
+    OTHERS,
+    SPENDING_GROUP_LENGTH
 };
 
 enum payment_type {
     CASH,
     CREDIT_CARD,
-    DEBIT_CARD
+    DEBIT_CARD,
+    PAYMENT_TYPE_LENGTH
 };
 
 struct past_entry {
@@ -43,3 +45,5 @@ struct future_entry {
 
 struct past_entry* db_past_get_all();
 struct future_entry* db_future_get_all();
+char* spending_group_to_string(enum spending_group group);
+char* payment_type_to_string(enum payment_type payment);

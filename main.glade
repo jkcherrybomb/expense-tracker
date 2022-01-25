@@ -99,7 +99,7 @@
             <property name="orientation">vertical</property>
             <child>
               <object class="GtkButton" id="future_add">
-                <property name="label" translatable="yes">button</property>
+                <property name="label" translatable="yes">Add a new future spending</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
