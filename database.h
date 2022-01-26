@@ -34,6 +34,9 @@ struct past_entry {
     int price;
     enum spending_group past_group;
     enum payment_type payment;
+    int day;
+    int month;
+    int year;
 };
 
 struct future_entry {

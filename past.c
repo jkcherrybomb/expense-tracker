@@ -1,6 +1,7 @@
 #include <gtk/gtk.h>
 
 #include "database.h"
+
 void past_new()
 {
     GtkBuilder* ui = gtk_builder_new_from_file("past_new.glade");
@@ -44,7 +45,8 @@ void past_main(GtkBuilder* ui)
         g_string_append_printf(str, "     GROUP: %s\n", spending_group_to_string(entries[i].past_group));
         g_string_append_printf(str, "     SPENT: %d\n", entries[i].price);
         g_string_append_printf(
-            str, "     PAYMENT TYPE: %s\n\n", payment_type_to_string(entries[i].payment));
+            str, "     PAYMENT TYPE: %s\n", payment_type_to_string(entries[i].payment));
+        g_string_append_printf(str, "     DATE: %d.%d.%d\n\n", entries[i].day, entries[i].month, entries[i].year);
     }
     gtk_label_set_text(label, str->str);
 }

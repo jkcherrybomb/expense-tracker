@@ -38,6 +38,9 @@ struct past_entry {
     int price;
     enum spending_group past_group;
     enum payment_type payment;
+    int day;
+    int month;
+    int year;
 };
 
 struct future_entry {
@@ -111,11 +114,14 @@ db_past_get_all()
     struct past_entry* pas = malloc((num_lines + 1) * sizeof(struct past_entry));
     for (int i = 0; i < num_lines; i++) {
         fscanf(file,
-            "%s %d %u %u\n",
+            "%s %d %u %u %d %d %d\n",
             pas[i].name,
             &pas[i].price,
             &pas[i].past_group,
-            &pas[i].payment);
+            &pas[i].payment,
+            &pas[i].day,
+            &pas[i].month,
+            &pas[i].year);
     }
     pas[num_lines].name[0] = '\0';
     return pas;
