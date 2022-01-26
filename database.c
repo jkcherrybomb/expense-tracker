@@ -173,3 +173,26 @@ db_future_get_all()
     fut[num_lines].name[0] = '\0';
     return fut;
 }
+
+void db_future_add_new(const char* name, int price, enum spending_group group, const char* occasion)
+{
+    FILE* file = fopen("future_sample.txt", "r");
+    int num_lines;
+    fscanf(file, "%d\n", &num_lines);
+
+    FILE* file2 = fopen("future_sample.txt", "w");
+    fprintf(file2, "%d\n", num_lines + 1);
+    fprintf(file2,
+        "%s %d %u %s\n",
+        name,
+        price,
+        group,
+        occasion);
+
+    char buf[4096];
+    while (fgets(buf, 4096, file) != NULL)
+        fputs(buf, file2);
+
+    fclose(file);
+    fclose(file2);
+}

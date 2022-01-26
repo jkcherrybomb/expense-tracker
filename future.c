@@ -2,6 +2,31 @@
 
 #include "database.h"
 
+void future_save(GtkWidget* _this, void* data)
+{
+    GtkBuilder* ui = data;
+
+    GtkEntry* name_entry = GTK_ENTRY(gtk_builder_get_object(ui, "fentry_name"));
+    const char* name = gtk_entry_get_text(name_entry);
+
+    GtkEntry* price_entry = GTK_ENTRY(gtk_builder_get_object(ui, "fentry_price"));
+    int price;
+    sscanf(gtk_entry_get_text(price_entry), "%d", &price);
+
+    GtkComboBox* group_combo = GTK_COMBO_BOX(gtk_builder_get_object(ui, "fentry_combo"));
+    GtkTreeIter group_iter;
+    gtk_combo_box_get_active_iter(group_combo, &group_iter);
+    GtkTreeModel* group_model = gtk_combo_box_get_model(group_combo);
+    enum spending_group group;
+    gtk_tree_model_get(group_model, &group_iter, 0, &group, -1);
+
+    GtkEntry* occasion_entry = GTK_ENTRY(gtk_builder_get_object(ui, "fentry_occasion"));
+    const char* occasion = gtk_entry_get_text(occasion_entry);
+
+    db_future_add_new(name, price, group, occasion);
+    gtk_main_quit();
+}
+
 void future_new()
 {
     GtkBuilder* ui = gtk_builder_new_from_file("future_new.glade");
@@ -18,6 +43,10 @@ void future_new()
 
     GtkWindow* window = GTK_WINDOW(gtk_builder_get_object(ui, "fentry_window"));
     gtk_widget_show_all(GTK_WIDGET(window));
+
+    GtkButton* button_add = GTK_BUTTON(gtk_builder_get_object(ui, "fentry_button"));
+    g_signal_connect(
+        G_OBJECT(button_add), "clicked", G_CALLBACK(future_save), ui);
 }
 
 void future_main(GtkBuilder* ui)
