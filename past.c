@@ -2,6 +2,47 @@
 
 #include "database.h"
 
+void past_save(GtkWidget* _this, void* data)
+{
+    GtkBuilder* ui = data;
+
+    GtkEntry* name_entry = GTK_ENTRY(gtk_builder_get_object(ui, "pentry_name"));
+    const char* name = gtk_entry_get_text(name_entry);
+
+    GtkEntry* price_entry = GTK_ENTRY(gtk_builder_get_object(ui, "pentry_price"));
+    int price;
+    sscanf(gtk_entry_get_text(price_entry), "%d", &price);
+
+    GtkComboBox* group_combo = GTK_COMBO_BOX(gtk_builder_get_object(ui, "pentry_combo"));
+    GtkTreeIter group_iter;
+    gtk_combo_box_get_active_iter(group_combo, &group_iter);
+    GtkTreeModel* group_model = gtk_combo_box_get_model(group_combo);
+    enum spending_group group;
+    gtk_tree_model_get(group_model, &group_iter, 0, &group, -1);
+
+    GtkComboBox* payment_combo = GTK_COMBO_BOX(gtk_builder_get_object(ui, "pentry_combo2"));
+    GtkTreeIter payment_iter;
+    gtk_combo_box_get_active_iter(payment_combo, &payment_iter);
+    GtkTreeModel* payment_model = gtk_combo_box_get_model(payment_combo);
+    enum payment_type payment;
+    gtk_tree_model_get(payment_model, &payment_iter, 0, &payment, -1);
+
+    GtkEntry* day_entry = GTK_ENTRY(gtk_builder_get_object(ui, "pentry_day"));
+    int day;
+    sscanf(gtk_entry_get_text(day_entry), "%d", &day);
+
+    GtkEntry* month_entry = GTK_ENTRY(gtk_builder_get_object(ui, "pentry_month"));
+    int month;
+    sscanf(gtk_entry_get_text(month_entry), "%d", &month);
+
+    GtkEntry* year_entry = GTK_ENTRY(gtk_builder_get_object(ui, "pentry_year"));
+    int year;
+    sscanf(gtk_entry_get_text(year_entry), "%d", &year);
+
+    db_past_add_new(name, price, group, payment, day, month, year);
+    gtk_main_quit();
+}
+
 void past_new()
 {
     GtkBuilder* ui = gtk_builder_new_from_file("past_new.glade");
@@ -28,6 +69,10 @@ void past_new()
 
     GtkWindow* window = GTK_WINDOW(gtk_builder_get_object(ui, "pentry_window"));
     gtk_widget_show_all(GTK_WIDGET(window));
+
+    GtkButton* button_add = GTK_BUTTON(gtk_builder_get_object(ui, "pentry_button"));
+    g_signal_connect(
+        G_OBJECT(button_add), "clicked", G_CALLBACK(past_save), ui);
 }
 
 void past_main(GtkBuilder* ui)
@@ -46,7 +91,7 @@ void past_main(GtkBuilder* ui)
         g_string_append_printf(str, "     SPENT: %d\n", entries[i].price);
         g_string_append_printf(
             str, "     PAYMENT TYPE: %s\n", payment_type_to_string(entries[i].payment));
-        g_string_append_printf(str, "     DATE: %d.%d.%d\n\n", entries[i].day, entries[i].month, entries[i].year);
+        g_string_append_printf(str, "     DATE: %u.%u.%u\n\n", entries[i].day, entries[i].month, entries[i].year);
     }
     gtk_label_set_text(label, str->str);
 }

@@ -114,7 +114,7 @@ db_past_get_all()
     struct past_entry* pas = malloc((num_lines + 1) * sizeof(struct past_entry));
     for (int i = 0; i < num_lines; i++) {
         fscanf(file,
-            "%s %d %u %u %d %d %d\n",
+            "%s %d %u %u %u %u %u\n",
             pas[i].name,
             &pas[i].price,
             &pas[i].past_group,
@@ -123,8 +123,35 @@ db_past_get_all()
             &pas[i].month,
             &pas[i].year);
     }
+    fclose(file);
     pas[num_lines].name[0] = '\0';
     return pas;
+}
+
+void db_past_add_new(const char* name, int price, enum spending_group group, enum payment_type payment, int day, int month, int year)
+{
+    FILE* file = fopen("past_sample.txt", "r");
+    int num_lines;
+    fscanf(file, "%d\n", &num_lines);
+
+    FILE* file2 = fopen("past_sample.txt", "w");
+    fprintf(file2, "%d\n", num_lines + 1);
+    fprintf(file2,
+        "%s %d %u %u %u %u %u\n",
+        name,
+        price,
+        group,
+        payment,
+        day,
+        month,
+        year);
+
+    char buf[4096];
+    while (fgets(buf, 4096, file) != NULL)
+        fputs(buf, file2);
+
+    fclose(file);
+    fclose(file2);
 }
 
 struct future_entry*
@@ -142,6 +169,7 @@ db_future_get_all()
             &fut[i].future_group,
             fut[i].occasion);
     }
+    fclose(file);
     fut[num_lines].name[0] = '\0';
     return fut;
 }
