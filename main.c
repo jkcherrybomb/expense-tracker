@@ -1,6 +1,8 @@
 #include <gtk/gtk.h>
 
+#include "database.h"
 #include "future.h"
+#include "home.h"
 #include "past.h"
 
 int main(int argc, char* argv[])
@@ -11,6 +13,7 @@ int main(int argc, char* argv[])
     g_signal_connect(
         G_OBJECT(window), "destroy", G_CALLBACK(gtk_main_quit), NULL);
 
+    home_main(ui);
     past_main(ui);
     future_main(ui);
 
