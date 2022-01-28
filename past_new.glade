@@ -96,7 +96,7 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="halign">start</property>
-            <property name="label" translatable="yes">Price</property>
+            <property name="label" translatable="yes">Price (example: 21,37)</property>
           </object>
           <packing>
             <property name="left_attach">0</property>

@@ -10,8 +10,8 @@ void future_save(GtkWidget* _this, void* data)
     const char* name = gtk_entry_get_text(name_entry);
 
     GtkEntry* price_entry = GTK_ENTRY(gtk_builder_get_object(ui, "fentry_price"));
-    int price;
-    sscanf(gtk_entry_get_text(price_entry), "%d", &price);
+    float price;
+    sscanf(gtk_entry_get_text(price_entry), "%f", &price);
 
     GtkComboBox* group_combo = GTK_COMBO_BOX(gtk_builder_get_object(ui, "fentry_combo"));
     GtkTreeIter group_iter;
@@ -120,7 +120,7 @@ void future_main(GtkBuilder* ui)
             continue;
         g_string_append_printf(str, "%d. %s\n", i + 1, entries[i].name);
         g_string_append_printf(str, "     GROUP: %s\n", spending_group_to_string(entries[i].past_group));
-        g_string_append_printf(str, "     SPENT: %d\n", entries[i].price);
+        g_string_append_printf(str, "     SPENT: %.2f\n", entries[i].price);
         g_string_append_printf(str, "     DATE: %u.%u.%u\n\n", entries[i].day, entries[i].month, entries[i].year);
     }
     gtk_label_set_text(label, str->str);

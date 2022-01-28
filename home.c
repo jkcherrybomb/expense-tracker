@@ -25,7 +25,7 @@ void home_main(GtkBuilder* ui)
             continue;
         g_string_append_printf(str, "[%s]", spending_group_to_string(entries[i].past_group));
         g_string_append_printf(str, " %s, ", entries[i].name);
-        g_string_append_printf(str, "%d\n", entries[i].price);
+        g_string_append_printf(str, "%.2f\n", entries[i].price);
         if (i == 9)
             break;
     }
@@ -45,7 +45,7 @@ void home_main(GtkBuilder* ui)
             continue;
         g_string_append_printf(str2, "[%s]", spending_group_to_string(entries2[i].past_group));
         g_string_append_printf(str2, " %s, ", entries2[i].name);
-        g_string_append_printf(str2, "%d\n", entries2[i].price);
+        g_string_append_printf(str2, "%.2f\n", entries2[i].price);
         if (i == 9)
             break;
     }

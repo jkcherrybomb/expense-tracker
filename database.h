@@ -24,7 +24,7 @@ enum spending_group {
 
 struct db_entry {
     char name[200];
-    int price;
+    float price;
     enum spending_group past_group;
     int day;
     int month;
@@ -33,4 +33,4 @@ struct db_entry {
 
 struct db_entry* db_get_all();
 char* spending_group_to_string(enum spending_group group);
-void db_add_new(const char* name, int price, enum spending_group group, int day, int month, int year);
+void db_add_new(const char* name, float price, enum spending_group group, int day, int month, int year);

@@ -28,7 +28,7 @@ enum spending_group {
 
 struct db_entry {
     char name[200];
-    int price;
+    float price;
     enum spending_group past_group;
     int day;
     int month;
@@ -89,7 +89,7 @@ db_get_all()
     struct db_entry* pas = malloc((num_lines + 1) * sizeof(struct db_entry));
     for (int i = 0; i < num_lines; i++) {
         fscanf(file,
-            "%s %d %u %u %u %u\n",
+            "%s %f %u %u %u %u\n",
             pas[i].name,
             &pas[i].price,
             &pas[i].past_group,
@@ -102,7 +102,7 @@ db_get_all()
     return pas;
 }
 
-void db_add_new(const char* name, int price, enum spending_group group, int day, int month, int year)
+void db_add_new(const char* name, float price, enum spending_group group, int day, int month, int year)
 {
     FILE* file = fopen("database.txt", "r");
     int num_lines;
@@ -111,7 +111,7 @@ void db_add_new(const char* name, int price, enum spending_group group, int day,
     FILE* file2 = fopen("database.txt", "w");
     fprintf(file2, "%d\n", num_lines + 1);
     fprintf(file2,
-        "%s %d %u %u %u %u\n",
+        "%s %f %u %u %u %u\n",
         name,
         price,
         group,
