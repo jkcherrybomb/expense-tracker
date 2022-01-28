@@ -136,3 +136,40 @@ void db_add_new(const char* name, float price, enum spending_group group, int da
     fclose(file);
     fclose(file2);
 }
+
+void db_delete(unsigned int id)
+{
+    FILE* file = fopen("database.txt", "r");
+    int num_lines;
+    fscanf(file, "%d\n", &num_lines);
+
+    FILE* file2 = fopen("database.txt", "w");
+    fprintf(file2, "%d\n", num_lines - 1);
+    for (int i = 0; i < num_lines; i++) {
+        char name[200];
+        float price;
+        enum spending_group past_group;
+        int day, month, year;
+        fscanf(file,
+            "%s %f %u %u %u %u\n",
+            name,
+            &price,
+            &past_group,
+            &day,
+            &month,
+            &year);
+        if (i + 1 != id) {
+            fprintf(file2,
+                "%s %f %u %u %u %u\n",
+                name,
+                price,
+                past_group,
+                day,
+                month,
+                year);
+        }
+    }
+
+    fclose(file);
+    fclose(file2);
+}

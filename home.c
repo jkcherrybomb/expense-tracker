@@ -2,8 +2,34 @@
 
 #include "database.h"
 
+void delete_spending(GtkWidget* _this, void* data)
+{
+    GtkBuilder* ui = data;
+
+    GtkEntry* id_entry = GTK_ENTRY(gtk_builder_get_object(ui, "delete_id"));
+    unsigned int id;
+    sscanf(gtk_entry_get_text(id_entry), "%u", &id);
+
+    db_delete(id);
+    gtk_main_quit();
+}
+
+void delete_window()
+{
+    GtkBuilder* ui = gtk_builder_new_from_file("delete.glade");
+
+    GtkButton* button = GTK_BUTTON(gtk_builder_get_object(ui, "delete_btn"));
+    g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(delete_spending), ui);
+
+    GtkWindow* window = GTK_WINDOW(gtk_builder_get_object(ui, "delete"));
+    gtk_widget_show_all(GTK_WIDGET(window));
+}
+
 void home_main(GtkBuilder* ui)
 {
+    GtkButton* delete = GTK_BUTTON(gtk_builder_get_object(ui, "delete_spending"));
+    g_signal_connect(delete, "clicked", G_CALLBACK(delete_window), NULL);
+
     time_t now;
     time(&now);
     struct tm* local = localtime(&now);
