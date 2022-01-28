@@ -79,4 +79,6 @@ void statistics_main(GtkBuilder* ui)
     g_string_append_printf(str, "Total sum of money planned to be spent this month : %lf\n", future_sum + past_sum);
 
     gtk_label_set_text(label, str->str);
+
+    free(entries);
 }

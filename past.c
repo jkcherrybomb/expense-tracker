@@ -125,4 +125,6 @@ void past_main(GtkBuilder* ui)
         g_string_append_printf(str, "     DATE: %u.%u.%u\n\n", entries[i].day, entries[i].month, entries[i].year);
     }
     gtk_label_set_text(label, str->str);
+
+    free(entries);
 }

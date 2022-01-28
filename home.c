@@ -76,4 +76,6 @@ void home_main(GtkBuilder* ui)
 
     gtk_label_set_text(label, str->str);
     gtk_label_set_text(label2, str2->str);
+
+    free(entries);
 }
