@@ -4,6 +4,7 @@
 #include "future.h"
 #include "home.h"
 #include "past.h"
+#include "statistics.h"
 
 int main(int argc, char* argv[])
 {
@@ -16,6 +17,7 @@ int main(int argc, char* argv[])
     home_main(ui);
     past_main(ui);
     future_main(ui);
+    statistics_main(ui);
 
     gtk_widget_show_all(GTK_WIDGET(window));
     gtk_main();

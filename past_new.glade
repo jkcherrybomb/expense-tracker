@@ -2,6 +2,12 @@
 <!-- Generated with glade 3.22.2 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
+  <object class="GtkListStore" id="pentry_day">
+    <columns>
+      <!-- column-name ID -->
+      <column type="guint"/>
+    </columns>
+  </object>
   <object class="GtkListStore" id="pentry_group">
     <columns>
       <!-- column-name ID -->
@@ -10,12 +16,24 @@
       <column type="gchararray"/>
     </columns>
   </object>
+  <object class="GtkListStore" id="pentry_month">
+    <columns>
+      <!-- column-name ID -->
+      <column type="guint"/>
+    </columns>
+  </object>
   <object class="GtkListStore" id="pentry_payment">
     <columns>
       <!-- column-name ID -->
       <column type="guint"/>
       <!-- column-name Name -->
       <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkListStore" id="pentry_year">
+    <columns>
+      <!-- column-name ID -->
+      <column type="guint"/>
     </columns>
   </object>
   <object class="GtkWindow" id="pentry_window">
@@ -69,7 +87,7 @@
           </object>
           <packing>
             <property name="left_attach">0</property>
-            <property name="top_attach">5</property>
+            <property name="top_attach">4</property>
             <property name="width">2</property>
           </packing>
         </child>
@@ -95,18 +113,6 @@
           <packing>
             <property name="left_attach">0</property>
             <property name="top_attach">2</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="halign">start</property>
-            <property name="label" translatable="yes">Payment type</property>
-          </object>
-          <packing>
-            <property name="left_attach">0</property>
-            <property name="top_attach">3</property>
           </packing>
         </child>
         <child>
@@ -138,23 +144,6 @@
           </packing>
         </child>
         <child>
-          <object class="GtkComboBox" id="pentry_combo2">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="model">pentry_payment</property>
-            <child>
-              <object class="GtkCellRendererText" id="Name"/>
-              <attributes>
-                <attribute name="text">1</attribute>
-              </attributes>
-            </child>
-          </object>
-          <packing>
-            <property name="left_attach">1</property>
-            <property name="top_attach">3</property>
-          </packing>
-        </child>
-        <child>
           <object class="GtkLabel">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
@@ -163,7 +152,7 @@
           </object>
           <packing>
             <property name="left_attach">0</property>
-            <property name="top_attach">4</property>
+            <property name="top_attach">3</property>
           </packing>
         </child>
         <child>
@@ -171,11 +160,16 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <child>
-              <object class="GtkEntry" id="pentry_day">
+              <object class="GtkComboBox" id="pentry_cday">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="width_chars">2</property>
-                <property name="input_purpose">number</property>
+                <property name="can_focus">False</property>
+                <property name="model">pentry_day</property>
+                <child>
+                  <object class="GtkCellRendererText"/>
+                  <attributes>
+                    <attribute name="text">0</attribute>
+                  </attributes>
+                </child>
               </object>
               <packing>
                 <property name="expand">True</property>
@@ -184,11 +178,16 @@
               </packing>
             </child>
             <child>
-              <object class="GtkEntry" id="pentry_month">
+              <object class="GtkComboBox" id="pentry_cmonth">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="width_chars">2</property>
-                <property name="input_purpose">number</property>
+                <property name="can_focus">False</property>
+                <property name="model">pentry_month</property>
+                <child>
+                  <object class="GtkCellRendererText"/>
+                  <attributes>
+                    <attribute name="text">0</attribute>
+                  </attributes>
+                </child>
               </object>
               <packing>
                 <property name="expand">True</property>
@@ -197,11 +196,16 @@
               </packing>
             </child>
             <child>
-              <object class="GtkEntry" id="pentry_year">
+              <object class="GtkComboBox" id="pentry_cyear">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="width_chars">4</property>
-                <property name="input_purpose">number</property>
+                <property name="can_focus">False</property>
+                <property name="model">pentry_year</property>
+                <child>
+                  <object class="GtkCellRendererText"/>
+                  <attributes>
+                    <attribute name="text">0</attribute>
+                  </attributes>
+                </child>
               </object>
               <packing>
                 <property name="expand">True</property>
@@ -212,7 +216,7 @@
           </object>
           <packing>
             <property name="left_attach">1</property>
-            <property name="top_attach">4</property>
+            <property name="top_attach">3</property>
           </packing>
         </child>
       </object>
