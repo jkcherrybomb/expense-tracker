@@ -31,6 +31,7 @@ struct db_entry {
     int year;
 };
 
+void db_create_if_missing();
 struct db_entry* db_get_all();
 char* spending_group_to_string(enum spending_group group);
 void db_add_new(const char* name, float price, enum spending_group group, int day, int month, int year);

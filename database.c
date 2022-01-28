@@ -80,6 +80,16 @@ char* spending_group_to_string(enum spending_group group)
     return "";
 }
 
+void db_create_if_missing()
+{
+    FILE* file = fopen("database.txt", "r");
+    if (file == NULL) {
+        file = fopen("database.txt", "w");
+        fprintf(file, "0\n");
+    }
+    fclose(file);
+}
+
 struct db_entry*
 db_get_all()
 {

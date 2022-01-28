@@ -24,6 +24,7 @@ int main(int argc, char* argv[])
     g_signal_connect(
         G_OBJECT(window), "destroy", G_CALLBACK(quit_program), NULL);
 
+    db_create_if_missing();
     home_main(ui);
     past_main(ui);
     future_main(ui);
