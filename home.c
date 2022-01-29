@@ -52,7 +52,7 @@ void home_main(GtkBuilder* ui)
         if (entries[i].year == currentyear && entries[i].month == currentmonth && entries[i].day > currentday)
             continue;
         g_string_append_printf(str, "[%s]", spending_group_to_string(entries[i].past_group));
-        g_string_append_printf(str, " %s, ", entries[i].name);
+        g_string_append_printf(str, " %s: ", entries[i].name);
         g_string_append_printf(str, "%.2f\n", entries[i].price);
         if (i == 9)
             break;
@@ -68,7 +68,7 @@ void home_main(GtkBuilder* ui)
         if (entries[i].year == currentyear && entries[i].month == currentmonth && entries[i].day < currentday)
             continue;
         g_string_append_printf(str2, "[%s]", spending_group_to_string(entries[i].past_group));
-        g_string_append_printf(str2, " %s, ", entries[i].name);
+        g_string_append_printf(str2, " %s: ", entries[i].name);
         g_string_append_printf(str2, "%.2f\n", entries[i].price);
         if (i == 9)
             break;
