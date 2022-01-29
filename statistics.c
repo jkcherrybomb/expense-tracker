@@ -64,19 +64,39 @@ void statistics_main(GtkBuilder* ui)
     g_string_append_printf(str, "Today's date: %s, %02d.%02d.%d\n\n", day_to_string(currentdweek), currentday, currentmonth, currentyear);
 
     struct db_entry* entries = db_get_all();
-    double past_sum = 0;
-    double future_sum = 0;
+    float past_sum = 0;
+    float future_sum = 0;
+    float months[13] = { 0 };
+    float groups[20] = { 0 };
+
     for (int i = 0; entries[i].name[0] != '\0'; i++) {
-        if (entries[i].month == currentmonth && entries[i].year == currentyear && entries[i].day <= currentday)
+        if (entries[i].month == currentmonth && entries[i].year == currentyear && entries[i].day <= currentday) {
             past_sum += entries[i].price;
-        if (entries[i].month == currentmonth && entries[i].year == currentyear && entries[i].day > currentday)
+            continue;
+        }
+        if (entries[i].month == currentmonth && entries[i].year == currentyear && entries[i].day > currentday) {
             future_sum += entries[i].price;
+            continue;
+        }
+        if (entries[i].year != currentyear)
+            continue;
+        months[entries[i].month] += entries[i].price;
+        groups[entries[i].past_group] += entries[i].price;
     }
-    g_string_append_printf(str, "Spent until now this month: %lf\n", past_sum);
+    g_string_append_printf(str, "Spent until now this month: %.2lf\n", past_sum);
+    g_string_append_printf(str, "Sum of planned future spendings this month: %.2f\n", future_sum);
+    g_string_append_printf(str, "Total sum of money planned to be spent this month : %.2f\n\n", future_sum + past_sum);
 
-    g_string_append_printf(str, "Sum of planned future spendings this month: %lf\n", future_sum);
+    g_string_append_printf(str, "Total sum of money spent during previous months this year:\n");
+    for (int i = 1; i < 13; i++) {
 
-    g_string_append_printf(str, "Total sum of money planned to be spent this month : %lf\n", future_sum + past_sum);
+        g_string_append_printf(str, "%s: %.2f\n", month_to_string(i), months[i]);
+    }
+    g_string_append_printf(str, "\n\n");
+    g_string_append_printf(str, "Total sum of money spent on each group this year until now:\n");
+    for (int i = 0; i < 20; i++) {
+        g_string_append_printf(str, "%s: %.2f\n", spending_group_to_string(i), groups[i]);
+    }
 
     gtk_label_set_text(label, str->str);
 
