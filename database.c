@@ -94,10 +94,10 @@ struct db_entry*
 db_get_all()
 {
     FILE* file = fopen("database.txt", "r");
-    int num_lines;
-    fscanf(file, "%d\n", &num_lines);
+    unsigned int num_lines;
+    fscanf(file, "%u\n", &num_lines);
     struct db_entry* pas = malloc((num_lines + 1) * sizeof(struct db_entry));
-    for (int i = 0; i < num_lines; i++) {
+    for (unsigned int i = 0; i < num_lines; i++) {
         fscanf(file,
             "%s %f %u %u %u %u\n",
             pas[i].name,
@@ -115,11 +115,11 @@ db_get_all()
 void db_add_new(const char* name, float price, enum spending_group group, int day, int month, int year)
 {
     FILE* file = fopen("database.txt", "r");
-    int num_lines;
-    fscanf(file, "%d\n", &num_lines);
+    unsigned int num_lines;
+    fscanf(file, "%u\n", &num_lines);
 
     FILE* file2 = fopen("database.txt", "w");
-    fprintf(file2, "%d\n", num_lines + 1);
+    fprintf(file2, "%u\n", num_lines + 1);
     fprintf(file2,
         "%s %f %u %u %u %u\n",
         name,
@@ -140,12 +140,12 @@ void db_add_new(const char* name, float price, enum spending_group group, int da
 void db_delete(unsigned int id)
 {
     FILE* file = fopen("database.txt", "r");
-    int num_lines;
-    fscanf(file, "%d\n", &num_lines);
+    unsigned int num_lines;
+    fscanf(file, "%u\n", &num_lines);
 
     FILE* file2 = fopen("database.txt", "w");
-    fprintf(file2, "%d\n", num_lines - 1);
-    for (int i = 0; i < num_lines; i++) {
+    fprintf(file2, "%u\n", num_lines - 1);
+    for (unsigned int i = 0; i < num_lines; i++) {
         char name[200];
         float price;
         enum spending_group past_group;

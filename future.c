@@ -2,7 +2,7 @@
 
 #include "database.h"
 
-void future_save(GtkWidget* _this, void* data)
+void future_save(G_GNUC_UNUSED GtkWidget* this, void* data)
 {
     GtkBuilder* ui = data;
 
@@ -99,7 +99,6 @@ void future_main(GtkBuilder* ui)
     time(&now);
     struct tm* local = localtime(&now);
     int currentday = local->tm_mday;
-    int currentdweek = local->tm_wday;
     int currentmonth = local->tm_mon + 1;
     int currentyear = local->tm_year + 1900;
     GtkButton* button = GTK_BUTTON(gtk_builder_get_object(ui, "future_add"));

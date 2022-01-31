@@ -4,7 +4,7 @@ OBJS = $(patsubst %.c, %.o, $(SRC))
 CFLAGS = `pkg-config gtk+-3.0 --cflags`
 LIBS = `pkg-config gtk+-3.0 --libs`
 
-CFLAGS += -ggdb
+CFLAGS += -ggdb -Wall -Wextra
 LIBS += -fsanitize=address
 
 all: $(OBJS)

@@ -19,6 +19,7 @@ char* day_to_string(int d)
         return "Saturday";
     if (d == 7)
         return "Sunday";
+    return NULL;
 }
 
 char* month_to_string(int m)
@@ -47,6 +48,7 @@ char* month_to_string(int m)
         return "November";
     if (m == 12)
         return "December";
+    return NULL;
 }
 
 void statistics_main(GtkBuilder* ui)

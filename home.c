@@ -2,7 +2,7 @@
 
 #include "database.h"
 
-void delete_spending(GtkWidget* _this, void* data)
+void delete_spending(G_GNUC_UNUSED GtkWidget* this, void* data)
 {
     GtkBuilder* ui = data;
 
@@ -34,7 +34,6 @@ void home_main(GtkBuilder* ui)
     time(&now);
     struct tm* local = localtime(&now);
     int currentday = local->tm_mday;
-    int currentdweek = local->tm_wday;
     int currentmonth = local->tm_mon + 1;
     int currentyear = local->tm_year + 1900;
 
