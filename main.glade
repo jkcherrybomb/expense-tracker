@@ -104,6 +104,9 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="label" translatable="yes">home</property>
+            <attributes>
+              <attribute name="font-desc" value="Sarai Bold 15"/>
+            </attributes>
           </object>
           <packing>
             <property name="tab_fill">False</property>
@@ -165,6 +168,9 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="label" translatable="yes">past spendings</property>
+            <attributes>
+              <attribute name="font-desc" value="Sarai Bold 15"/>
+            </attributes>
           </object>
           <packing>
             <property name="position">1</property>
@@ -227,6 +233,9 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="label" translatable="yes">future spendings</property>
+            <attributes>
+              <attribute name="font-desc" value="Sarai Bold 15"/>
+            </attributes>
           </object>
           <packing>
             <property name="position">2</property>
@@ -252,7 +261,7 @@
             <property name="can_focus">False</property>
             <property name="label" translatable="yes">statistics</property>
             <attributes>
-              <attribute name="font-desc" value="Sarai Bold 10"/>
+              <attribute name="font-desc" value="Sarai Bold 15"/>
             </attributes>
           </object>
           <packing>
