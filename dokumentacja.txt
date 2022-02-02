@@ -1,0 +1,50 @@
+Główny pomysł: System rejestracji wydatków i przychodów studenta. 
+
+Zakładki:
+
+Home
+- przycisk żeby usunąć jakiś wydatek z bazy po jego numerze identyfikacyjnym (w nowym oknie)
+- po lewej 10 ostatnich przeszłych wydatków
+- po prawej 10 ostatnich przyszłych wydatków
+(liczy się kolejność wpisania)
+Past spendings
+- przycisk by dodać nowy przeszły wydatek (w nowym oknie)
+- cały spis przeszłych wydatków
+Future spendings
+- przycisk by dodać nowy przyszły wydatek (w nowym oknie)
+- cały spis przyszłych wydatków
+Statistics
+- suma wydanych dotychczas pieniędzy w tym miesiącu
+- suma planowanych przyszłych wydatków w tym miesiącu 
+- szacowana suma wydana do końca miesiąca (przyszłe i przeszłe)
+- wydana suma w każdym miesiącu aktualnego roku
+- wydana suma na każdą grupę wydatków w tym roku
+
+Pliki: 
+- main: funkcje zarządzające życiem głównego okna
+    - int main: otwiera okno w gtk i woła funkcje programu
+    - void quit: zamyka okno w gtk
+- home: odpowidzialny za zakładkę home
+    - void home_main: wypisuje ostatnie wydatki
+    - void delete_window: otwarcie nowego okna do usunięcia wydatku
+    - void delete_spending: zbiera wejście z okna i przekazuje je do db_delete
+- past: odpowiedzialny za zakładkę past spendings
+    - void past_main: wypisuje przeszłe wydatki
+    - void past_new: wyświetla nowe okno do dodania wydatku
+    - void past_save: zbiera wejście z okna, przekazuje je db_add_new i zamyka, po czym otwiera cały program
+- future: odpowiedzialny za zakładkę future spendings
+    - void future_main: wypisuje przyszłe wydatki
+    - void future_new: wyświetla nowe okno do dodania wydatku
+    - void future_save: zbiera wejście z okna, przekazuje je db_add_new i zamyka, po czym otwiera cały program
+- statistics: odpowiedzialny za zakładkę statistics
+    - void statistics_main: wypisuje statystyki
+    - char* month_to_string: zamienia numer miesiąca na stringa z nazwą
+    - char* day_to_string: zamienia numer dnia tygodnia na stringa z nazwą
+- database: odpowiedzialny za bazę danych
+    - char* spending_group_to_string: zamienia numer grupy wydatów na stringa z nazwą
+    - void db_create_if_missing: jeśli nie istnieje plik z bazą danych tworzy go
+    - struct db_entry* db_get_all: zwraca wszystkie wpisy w bazie danych
+    - void db_add_new: dodaje nowy wpis do bazy danych
+    - void db_delete: usuwa wpis z bazy danych po jego numerze
+
+Program został napisany w języku C przy pomocy biblioteki graficznej Gtk 3 i edytora wizualnego Glade.
