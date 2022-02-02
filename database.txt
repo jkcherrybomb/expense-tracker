@@ -1,3 +1,20 @@
-2
-oloiz 21,370001 0 1 2 2022
-ziolo 420,690002 0 28 1 2022
+19
+biedronka 100 0 1 1 2020
+mieszkanie 200 1 2 2 2021
+gaz 300 2 3 3 2022
+bilet_miesieczny 400 3 4 4 2022
+bilet_do_sopotu 500 4 5 5 2022
+apap 600 5 6 6 2022
+okulista 700 6 7 7 2022
+plyn_do_kapieli 800 7 8 8 2022
+szminka 900 8 9 9 2022
+jeansy 1000 9 10 10 2022
+mcdonald 1100 10 11 11 2022
+kino 1200 11 12 12 2022
+urodziny_grzecha 1300 12 13 2 2022
+najlepszego_grzechu 1400 13 14 2 2022
+gra_endera 1500 14 15 2 2022
+tenis_z_czarkiem 1600 15 16 4 2023
+wypad_do_czestochowy 1700 16 17 5 2024
+miski 1800 17 18 6 2022
+nowy_telefon 1900 18 19 7 2022
